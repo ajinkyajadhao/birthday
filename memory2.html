@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Love Flip Book 💖</title>
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffe6f2,#fff0f5);
+    font-family:Georgia, serif;
+    overflow:hidden;
+}
+
+/* BOOK CONTAINER */
+.book{
+    position:relative;
+    width:500px;
+    height:600px;
+    perspective:3000px;
+    transition: all 1s ease;
+    z-index:1;
+}
+
+/* COVER */
+.cover{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#ff66b2;
+    border-radius:25px;
+    transform-origin:left;
+    transition:1s ease;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:clamp(22px,4vw,28px);
+    color:white;
+    cursor:pointer;
+    z-index:100;
+    box-shadow:0 20px 50px rgba(0,0,0,0.3);
+}
+
+.book.open .cover{
+    transform:rotateY(-180deg);
+}
+
+/* PAGE */
+.page{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:white;
+    border-radius:25px;
+    padding:20px;
+    box-sizing:border-box;
+    transform-origin:left;
+    transform-style:preserve-3d;
+    transition:1s ease;
+    display:flex;
+    overflow:hidden;
+}
+
+.page.flipped{
+    transform:rotateY(-180deg);
+}
+
+/* LEFT IMAGE */
+.left, .right{
+    width:50%;
+    height:100%;
+    padding:4%;
+}
+
+.left img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:15px;
+    animation:photoFade 1.2s ease;
+}
+
+/* RIGHT TEXT */
+.right{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.right h2{
+    color:#ff1493;
+    margin-bottom:15px;
+    font-size:clamp(18px,3vw,24px);
+}
+
+.right button{
+    margin-top:20px;
+    padding:10px 20px;
+    border:none;
+    background:#ff66b2;
+    color:white;
+    border-radius:20px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+/* BOOK disappear */
+.book.hide{
+    transform:scale(0) rotateY(20deg);
+    opacity:0;
+    transition: all 1s ease;
+}
+
+/* BOARD ANIMATION */
+.board{
+    position:absolute;
+    bottom:-700px; /* start below screen */
+    left:50%;
+    transform:translateX(-50%);
+    width:80%;
+    max-width:600px;
+    display:none;
+    z-index:10;
+    border-radius:25px;
+    text-align:center;
+}
+
+.board img{
+    width:100%;
+    border-radius:25px;
+    display:block;
+}
+
+.board-text{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:90%;
+    font-size:clamp(16px,2.5vw,24px);
+    color:white;
+    font-weight:bold;
+    text-shadow:2px 2px 6px black;
+    line-height:1.5;
+    padding:10px;
+    background:rgba(0,0,0,0.2);
+    border-radius:15px;
+}
+
+/* KEYFRAME WALKING ANIMATION */
+@keyframes walkIn{
+    0%{bottom:-700px;}
+    60%{bottom:55%;} /* overshoot */
+    80%{bottom:50%;} /* settle */
+    100%{bottom:50%;}
+}
+
+/* FINAL PAGE */
+.final{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#e0e0e0; /* light gray */
+    display:none;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+    color:#ff1493;
+    border-radius:25px;
+    overflow:hidden;
+    flex-direction:column;
+}
+
+/* Stars */
+.stars{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:transparent;
+    z-index:1;
+}
+.stars::after{
+    content:''; position:absolute;
+    width:2px; height:2px; background:white;
+    box-shadow:50px 30px white,120px 80px white,200px 50px white,
+    300px 120px white,400px 60px white,450px 150px white,500px 30px white;
+    border-radius:50%;
+    animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+    0%{opacity:0.2;} 50%{opacity:1;} 100%{opacity:0.2;}
+}
+
+/* Fireworks */
+.fireworks{
+    position:absolute; width:100%; height:100%; top:0; left:0;
+    pointer-events:none; z-index:0;
+}
+.fireworks::before, .fireworks::after{
+    content:''; position:absolute; width:5px; height:5px;
+    border-radius:50%;
+    background:linear-gradient(45deg,#ff1493,#ff66b2);
+    animation:firework 1s ease-in-out infinite;
+}
+.fireworks::after{
+    left:70%; top:40%; animation-delay:0.5s;
+}
+@keyframes firework{
+    0%{transform:scale(0) translate(0,0); opacity:1;}
+    50%{transform:scale(1.5) translate(30px,-30px); opacity:0.7;}
+    100%{transform:scale(0) translate(60px,-60px); opacity:0;}
+}
+
+/* Animations */
+@keyframes photoFade{
+  from{opacity:0; transform:scale(0.9);}
+  to{opacity:1; transform:scale(1);}
+}
+@keyframes fadeUp{
+    to{ opacity:1; transform:translateY(0);}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .page{ flex-direction:column; }
+  .left,.right{ width:100%; height:50%; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="book" id="book">
+
+  <!-- COVER -->
+  <div class="cover" onclick="openBook()">
+   My promises to my wifey 💖
+  </div>
+
+  <!-- PAGE 1 -->
+  <div class="page" id="page1" style="z-index:5;">
+    <div class="left"><img src="ra8.png"></div>
+    <div class="right">
+      <h2>muze proud h mene aapko choose kiya issi liye nai kuki aap aachi ya sundar ho mene aapko coose kiya kuki💕</h2>
+      <button onclick="nextPage(1)">Next ➜</button>
+    </div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="page" id="page2" style="z-index:4;">
+    <div class="left"><img src="ra11.png"></div>
+    <div class="right">
+      <h2>aajkal sacha pyar milna bohot muskil h aagar aap kabhi muzse ruth jao m aapko hamesha manunga promis karta hu ki.....</h2>
+      <button onclick="nextPage(2)">Next ➜</button>
+    </div>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="page" id="page3" style="z-index:3;">
+    <div class="left"><img src="ra5.png"></div>
+    <div class="right">
+      <h2>kabhi us situation m aapko chod kar nai jaunga mera pyar hameshab aapke liye badhta rahega  ✨</h2>
+      <button onclick="nextPage(3)">Next ➜</button>
+    </div>
+  </div>
+
+  <!-- PAGE 4 -->
+  <div class="page" id="page4" style="z-index:2;">
+    <div class="left"><img src="ra9.png"></div>
+    <div class="right">
+      <h2>har din har paal pata h mene aapko choose kiya kuki mera dill aapke pass jakar santh ho jata h ❤️</h2>
+      <button onclick="nextPage(4)">Next ➜</button>
+    </div>
+  </div>
+
+  <!-- PAGE 5 -->
+  <div class="page" id="page5" style="z-index:1;">
+    <div class="left"><img src="ra5.png"></div>
+    <div class="right">
+      <h2>m aapko jab bhi dekhta hu meri aakho m sukoon milta h or m aapko hamesha pyar se rakhunga aapne marte dam tak 😊❤️</h2>
+      <button onclick="showBoard()">Go To Surprise 💝</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOARD -->
+<div class="board" id="board">
+    <img src="board.png">
+    <div class="board-text">
+      🎁 Here’s Your Last Gift 💖<br>Open it and see the magic!
+    </div>
+</div>
+
+<!-- FINAL PAGE -->
+<div class="final" id="final">
+    <div class="fireworks"></div>
+    <div class="stars"></div>
+
+    <h1 class="final-text">
+      🎉 Happy Birthday In Advance My Princess 💖 <br><br>
+      I love you mere princess 😊❤️🫂😘<br><br>
+      Teri muskaan meri jaan ban jaaye,<br>
+      Teri baatein meri pehchaan ban jaaye 💗<br>
+      Tu sirf meri mohabbat nahi,<br>
+      Tu meri duniya meri shaan ban jaaye 👑
+    </h1>
+
+    <!-- WORKING BUTTON -->
+    <div style="margin-top:20px; z-index:100; position:relative;">
+      <button onclick="goToPhotoSection()" style="padding:12px 25px; font-size:18px; background:#ff66b2; color:white; border:none; border-radius:20px; cursor:pointer;">
+        Go To Photo Section 📸
+      </button>
+    </div>
+</div>
+
+<script>
+function openBook(){
+    document.getElementById("book").classList.add("open");
+}
+
+// PAGE FLIP FUNCTIONS
+function nextPage(num){
+    document.getElementById("page"+num).classList.add("flipped");
+}
+
+// SHOW BOARD & FINAL PAGE
+function showBoard(){
+    const book = document.getElementById("book");
+    const board = document.getElementById("board");
+
+    book.classList.add("hide");
+
+    setTimeout(()=>{
+        board.style.display="block";
+        board.style.animation="walkIn 1.5s forwards";
+
+        setTimeout(()=>{
+            board.style.display="none";
+            document.getElementById("final").style.display="flex";
+        },3000);
+    },1000);
+}
+
+// FINAL BUTTON FUNCTION
+function goToPhotoSection(){
+    window.location.href = "r1.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hello Jaan ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    font-family: 'Poppins', sans-serif;
+    overflow:hidden;
+}
+
+#text{
+    font-size:45px;
+    font-weight:bold;
+    color:white;
+    text-align:center;
+    opacity:0;
+    transition:opacity 0.5s ease;
+}
+
+button{
+    padding:15px 30px;
+    font-size:20px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#ff4e73;
+    cursor:pointer;
+    display:none;
+    margin-top:30px;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+</style>
+</head>
+<body>
+
+<div style="text-align:center;">
+    <div id="text"></div>
+    <button id="giftBtn" onclick="goToGame()">Go To Your Gift 🎁</button>
+</div>
+
+<script>
+
+const texts = [
+    "Hello Jaan ❤️",
+    "Jaan aapko pata h aapka kya gift h?",
+    "Socho Socho 😌",
+    "Koi baat nai m he bata deta hu 😉",
+    "Baby bata du? 😍",
+    "Chalo aab ye lo kissi 😘",
+    "Ye lo babu aapka gift 🎁"
+];
+
+let index = 0;
+const textElement = document.getElementById("text");
+const button = document.getElementById("giftBtn");
+
+function showText(){
+    if(index < texts.length){
+        textElement.style.opacity = 0;
+
+        setTimeout(()=>{
+            textElement.innerText = texts[index];
+            textElement.style.opacity = 1;
+            index++;
+        },500);
+
+        setTimeout(showText,2000);
+    } else {
+        textElement.style.opacity = 0;
+        setTimeout(()=>{
+            textElement.innerText = "";
+            button.style.display = "inline-block";
+        },500);
+    }
+}
+
+function goToGame(){
+    window.location.href = "game.html";
+}
+
+showText();
+
+</script>
+
+</body>
+</html>

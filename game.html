@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Special Game 💖</title>
+
+<style>
+body{
+    margin:0;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    font-family:sans-serif;
+}
+
+.container{
+    text-align:center;
+}
+
+h1,h2,h3{
+    color:white;
+}
+
+/* MEMORY GAME */
+
+.game{
+    display:grid;
+    grid-template-columns:repeat(4,95px);
+    gap:12px;
+    justify-content:center;
+}
+
+.card{
+    width:95px;
+    height:95px;
+    background:white;
+    border-radius:12px;
+    cursor:pointer;
+    overflow:hidden;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+}
+
+.card.flipped img{
+    display:block;
+}
+
+.card.matched{
+    pointer-events:none;
+    opacity:0.6;
+}
+
+/* QUESTION */
+
+#questionSection{
+    display:none;
+    animation:fadeIn 1s ease forwards;
+}
+
+.optionBtn{
+    padding:10px 20px;
+    margin:10px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+/* TIC TAC TOE */
+
+#ticTacToe{
+    display:none;
+}
+
+.board{
+    display:grid;
+    grid-template-columns:repeat(3,120px);
+    gap:15px;
+    justify-content:center;
+    margin-top:20px;
+}
+
+.cell{
+    width:120px;
+    height:120px;
+    background:white;
+    font-size:65px;
+    font-weight:bold;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    border-radius:20px;
+    transition:0.3s;
+}
+
+.cell:hover{
+    transform:scale(1.08);
+}
+
+.cell.x{
+    color:#ff2e63;
+}
+
+.cell.o{
+    color:#0099ff;
+}
+
+#status{
+    margin-top:15px;
+    font-size:22px;
+    color:white;
+}
+
+/* HEART QUESTION */
+
+#heartQuestion{
+    display:none;
+    animation:fadeIn 1s ease forwards;
+}
+
+#heartInput{
+    padding:10px;
+    width:220px;
+    border-radius:20px;
+    border:none;
+    font-size:16px;
+    text-align:center;
+}
+
+#heartBtn{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+#errorMsg{
+    color:yellow;
+    margin-top:10px;
+}
+
+/* FINAL HAND SECTION */
+
+#finalHand{
+    display:none;
+    animation:fadeIn 1s ease forwards;
+}
+
+#handEmoji{
+    font-size:120px;
+    cursor:pointer;
+    margin-top:30px;
+    transition:0.3s;
+}
+
+#handEmoji:hover{
+    transform:scale(1.2);
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1);}
+}
+
+@media (max-width:480px){
+    .board{
+        grid-template-columns:repeat(3,90px);
+    }
+    .cell{
+        width:90px;
+        height:90px;
+        font-size:45px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 id="title">Match The Same Photo 💕</h1>
+
+<div class="game" id="memoryGame"></div>
+
+<!-- Question -->
+<div id="questionSection">
+    <h2>Aapko or game khelne h jaan? 😍</h2>
+    <button class="optionBtn" onclick="startTicTacToe()">Yes ❤️</button>
+    <button class="optionBtn" onclick="goToGift()">No 😘</button>
+</div>
+
+<!-- Tic Tac Toe -->
+<div id="ticTacToe">
+    <h2>Let's Play Tic Tac Toe 💖</h2>
+    <div class="board" id="board"></div>
+    <h3 id="status"></h3>
+</div>
+
+<!-- HEART QUESTION -->
+<div id="heartQuestion">
+    <h2>Who is my heart? 💘</h2>
+    <input type="text" id="heartInput" placeholder="Type your answer...">
+    <br>
+    <button id="heartBtn" onclick="checkHeart()">Submit 💖</button>
+    <div id="errorMsg"></div>
+</div>
+
+<!-- FINAL HAND SECTION -->
+<div id="finalHand">
+    <h2>Want to hold my hands jaan till last breath? 💞</h2>
+    <div id="handEmoji" onclick="goToMain()">🤝</div>
+</div>
+
+</div>
+
+<script>
+
+/* ================= MEMORY GAME ================= */
+
+const images=[
+"ar1.png","ar2.png","ar3.png","ar4.png",
+"ar5.png","ar6.png","ar7.png","ar8.png"
+];
+
+let gameImages=[...images,...images];
+gameImages.sort(()=>0.5-Math.random());
+
+const game=document.getElementById("memoryGame");
+
+let firstCard=null,secondCard=null,lock=false,matches=0;
+
+gameImages.forEach(src=>{
+    const card=document.createElement("div");
+    card.classList.add("card");
+
+    const img=document.createElement("img");
+    img.src=src;
+
+    card.appendChild(img);
+    game.appendChild(card);
+
+    card.addEventListener("click",function(){
+        if(lock||card.classList.contains("flipped")) return;
+
+        card.classList.add("flipped");
+
+        if(!firstCard){
+            firstCard=card;
+        } else {
+            secondCard=card;
+            lock=true;
+
+            if(firstCard.querySelector("img").src===secondCard.querySelector("img").src){
+                firstCard.classList.add("matched");
+                secondCard.classList.add("matched");
+                matches++;
+                reset();
+
+                if(matches===8){
+                    setTimeout(showQuestion,800);
+                }
+
+            } else {
+                setTimeout(()=>{
+                    firstCard.classList.remove("flipped");
+                    secondCard.classList.remove("flipped");
+                    reset();
+                },700);
+            }
+        }
+    });
+});
+
+function reset(){
+    firstCard=null;
+    secondCard=null;
+    lock=false;
+}
+
+function showQuestion(){
+    document.getElementById("memoryGame").style.display="none";
+    document.getElementById("title").style.display="none";
+    document.getElementById("questionSection").style.display="block";
+}
+
+function goToGift(){
+    window.location.href="index.html";
+}
+
+function startTicTacToe(){
+    document.getElementById("questionSection").style.display="none";
+    document.getElementById("ticTacToe").style.display="block";
+    startGame();
+}
+
+/* ================= TIC TAC TOE ================= */
+
+let boardState=[],gameActive=true;
+
+function startGame(){
+    const board=document.getElementById("board");
+    board.innerHTML="";
+    boardState=["","","","","","","","",""];
+    gameActive=true;
+
+    for(let i=0;i<9;i++){
+        const cell=document.createElement("div");
+        cell.classList.add("cell");
+        cell.addEventListener("click",()=>humanMove(i,cell));
+        board.appendChild(cell);
+    }
+
+    document.getElementById("status").innerText="Your Turn 💕";
+}
+
+function humanMove(index,cell){
+    if(boardState[index]!==""||!gameActive)return;
+
+    boardState[index]="X";
+    cell.innerText="X";
+    cell.classList.add("x");
+
+    if(checkWin("X")||!boardState.includes("")){
+        endGame();
+        return;
+    }
+
+    setTimeout(robotMove,600);
+}
+
+function robotMove(){
+    let emptyIndexes=boardState.map((v,i)=>v===""?i:null).filter(v=>v!==null);
+    if(emptyIndexes.length===0) return;
+
+    let randomIndex=emptyIndexes[Math.floor(Math.random()*emptyIndexes.length)];
+    boardState[randomIndex]="O";
+
+    const board=document.getElementById("board");
+    board.children[randomIndex].innerText="O";
+    board.children[randomIndex].classList.add("o");
+
+    if(checkWin("O")||!boardState.includes("")){
+        endGame();
+    }
+}
+
+function checkWin(player){
+    const combos=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    return combos.some(combo=>combo.every(i=>boardState[i]===player));
+}
+
+function endGame(){
+    gameActive=false;
+    setTimeout(()=>{
+        document.getElementById("ticTacToe").style.display="none";
+        document.getElementById("heartQuestion").style.display="block";
+    },1200);
+}
+
+/* ================= HEART CHECK ================= */
+
+function checkHeart(){
+    let answer=document.getElementById("heartInput").value.toLowerCase().trim();
+    let correctAnswers=["me","m","raksha","my wifey","my wife","jaan"];
+
+    if(correctAnswers.includes(answer)){
+        document.getElementById("heartQuestion").style.display="none";
+        document.getElementById("finalHand").style.display="block";
+    } else {
+        document.getElementById("errorMsg").innerText="Wrong answer 😝 Try again jaan 💕";
+    }
+}
+
+/* ================= FINAL HAND ================= */
+
+function goToMain(){
+    window.location.href="main.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Memory 1</title>
+
+<style>
+body{
+    margin:0;
+    background:linear-gradient(135deg,#ffe6f0,#fff0f5);
+    font-family:'Comic Sans MS',cursive;
+    text-align:center;
+    overflow:hidden;
+}
+
+/* sections */
+.section{
+    padding:40px 20px;
+}
+
+/* headings */
+h1,h2{
+    color:#ff2e63;
+    text-shadow:0 0 10px pink;
+}
+
+/* photos */
+.photo-wrapper{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    margin:30px 0;
+}
+
+.photo-wrapper img{
+    width:220px;
+    height:270px;
+    object-fit:cover;
+    border:12px solid white;
+    box-shadow:0 15px 25px rgba(0,0,0,0.3);
+    border-radius:12px;
+    transform:rotate(-3deg);
+}
+
+.photo-wrapper img:nth-child(2){
+    transform:rotate(4deg);
+}
+
+/* text */
+.question{
+    font-size:22px;
+    margin:20px 0;
+    font-weight:bold;
+}
+
+.answer{
+    font-size:20px;
+    max-width:700px;
+    margin:auto;
+}
+
+/* video */
+video{
+    width:80%;
+    max-width:500px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    margin:20px 0;
+}
+
+/* buttons */
+button{
+    padding:12px 30px;
+    font-size:18px;
+    background:#ff2e63;
+    color:white;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    margin-top:20px;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ff4d88;
+}
+
+/* hide second section */
+#secondContent{
+    display:none;
+}
+
+/* 🎉 Birthday Overlay */
+#birthdayOverlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    color:white;
+    opacity:0;
+    visibility:hidden;
+    transition:1s ease;
+    z-index:999;
+}
+
+#birthdayOverlay.show{
+    opacity:1;
+    visibility:visible;
+}
+
+/* big animated text */
+.bigText{
+    font-size:55px;
+    font-weight:bold;
+    animation:glow 2s infinite alternate;
+    text-align:center;
+}
+
+@keyframes glow{
+    from{ text-shadow:0 0 10px pink, 0 0 20px hotpink; }
+    to{ text-shadow:0 0 20px #ff00ff, 0 0 40px #ff66ff; }
+}
+
+/* shayari */
+.shayari{
+    margin-top:30px;
+    font-size:22px;
+    max-width:800px;
+    line-height:1.6;
+    text-align:center;
+}
+
+/* floating hearts */
+.heart{
+    position:absolute;
+    bottom:-20px;
+    font-size:24px;
+    animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+    from{ transform:translateY(0); opacity:1;}
+    to{ transform:translateY(-100vh); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIRST SECTION -->
+<div class="section" id="firstContent">
+
+<h1>💖 16 Days Remaining For My Wifey’s Birthday 💖</h1>
+
+<div class="photo-wrapper">
+    <img src="ra1.png">
+    <img src="ra2.png">
+</div>
+
+<div class="question">
+    Do you remember the first time we talked? 🥰
+</div>
+
+<div class="answer">
+    That moment changed everything for me.<br>
+    I didn't know you would become my whole world<br>
+    And i saw you on that move movement on chat i <br>
+    was like i fount my heaven i found my peace <br>
+    your the one who make me feel like yes i also<br>
+    my distination. I also have someone prisious in <br>
+    my life then we talk and then i send you msg me <br>
+    in perional and then we get too close and now we <br>
+    are here the best part of my life is i meet you <br>
+    and fall in love with you every time i saw you ❤️
+</div>
+
+<button onclick="nextMemory()">Click For Something Special ✨</button>
+
+</div>
+
+<!-- SECOND SECTION -->
+<div class="section" id="secondContent">
+
+<h2>🌸 The Day I Saw You 🌸</h2>
+
+<div class="answer">
+    The day I saw you, everything felt different.<br>
+        My heart skipped in a way I had never felt before.<br>
+        I didn’t know that moment would become<br>
+        the most beautiful chapter of my life. <br>
+        i dont know how to express that felling but <br>
+        i  have to say that felling in the words i <br>
+        would say 💞</br>
+</div>
+
+<video controls>
+    <source src="mine.mp4" type="video/mp4">
+</video>
+
+<br>
+
+<button onclick="showBirthday()">Final Surprise 🎂</button>
+
+</div>
+
+<!-- 🎉 BIRTHDAY SCREEN -->
+<div id="birthdayOverlay">
+
+<div class="bigText">
+🎉 Happy Birthday In Advance My Love 💖🎂✨
+</div>
+
+<div class="shayari">
+Teri muskaan meri duniya ka noor hai,<br>
+Tera saath hi mera sabse bada suroor hai 💞<br>
+Har janam me tu mile bas yehi dua hai,<br>
+Kyuki tu hi meri mohabbat ka asli gurur hai ❤️
+</div>
+
+<br>
+
+<button onclick="goToR1()">Go To Photo Section 📸</button>
+
+</div>
+
+<script>
+function nextMemory(){
+    document.getElementById("firstContent").style.display="none";
+    document.getElementById("secondContent").style.display="block";
+}
+
+function showBirthday(){
+    document.getElementById("birthdayOverlay").classList.add("show");
+
+    setInterval(function(){
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (20 + Math.random() * 30) + "px";
+        document.getElementById("birthdayOverlay").appendChild(heart);
+
+        setTimeout(()=>{ heart.remove(); },6000);
+    },500);
+}
+
+function goToR1(){
+    window.location.href = "r1.html";
+}
+</script>
+
+</body>
+</html>
