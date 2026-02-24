@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Our Memory Scrapbook</title>
+
+<style>
+body{
+    margin:0;
+    background:#f6e8c3;
+    font-family:'Comic Sans MS',cursive;
+    overflow-x:hidden;
+}
+
+/* notebook lines */
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background: repeating-linear-gradient(
+        #f6e8c3,
+        #f6e8c3 28px,
+        rgba(0,0,0,0.05) 29px
+    );
+    z-index:-3;
+}
+
+/* spiral */
+.spiral{
+    position:fixed;
+    left:0;
+    top:0;
+    width:50px;
+    height:100%;
+    background: repeating-linear-gradient(
+        #999 0px,
+        #999 8px,
+        transparent 8px,
+        transparent 40px
+    );
+    z-index:1;
+}
+
+/* background stickers */
+.bg-sticker{
+    position:fixed;
+    font-size:45px;
+    opacity:0.12;
+    z-index:-1;
+    animation:floatBg 10s ease-in-out infinite alternate;
+}
+
+@keyframes floatBg{
+    from{ transform:translateY(0px) rotate(0deg);}
+    to{ transform:translateY(-60px) rotate(20deg);}
+}
+
+/* timeline */
+.timeline{
+    position:relative;
+    margin-left:100px;
+    padding:120px 0;
+}
+
+.memory{
+    width:45%;
+    position:relative;
+    margin:140px 0;
+}
+
+.memory img{
+    width:230px;
+    height:270px;
+    object-fit:cover;
+    border:10px solid white;
+    box-shadow:0 15px 25px rgba(0,0,0,0.3);
+    transition:0.3s;
+}
+
+.memory img:hover{
+    transform:scale(1.05);
+}
+
+.left{ margin-left:0; }
+.right{ margin-left:55%; }
+
+.caption{
+    font-weight:bold;
+    margin-top:10px;
+}
+
+/* LOCK STYLE */
+.lock-box{
+    position:relative;
+    display:inline-block;
+}
+
+.lock-overlay{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.65);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:14px;
+    text-align:center;
+    border:10px solid white;
+}
+
+.lock-icon{
+    font-size:40px;
+    margin-bottom:8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="spiral"></div>
+
+<!-- Background Stickers -->
+<div class="bg-sticker" style="top:10%; left:5%;">🌸</div>
+<div class="bg-sticker" style="top:30%; left:15%;">💖</div>
+<div class="bg-sticker" style="top:60%; left:8%;">🦋</div>
+<div class="bg-sticker" style="top:20%; right:10%;">✨</div>
+<div class="bg-sticker" style="top:50%; right:5%;">🌷</div>
+<div class="bg-sticker" style="top:75%; right:12%;">🎀</div>
+
+<div class="timeline" id="timeline"></div>
+
+<script>
+
+let captions = [
+"day 16 remaining meri wifey ka birthday💕",
+"day 15 remaining meri cutie pie bithday 🌸",
+"day 14 remaining meri laddo ka birthday 😂",
+"day 13 remaining meri jaan ka birthday 😅",
+"day 12 remaining meri voti ka birthday 🎬",
+"day 11 remaining meri princess ka birthday 🌧",
+"day 10 remaining meri baby ka birthday 🙏",
+"day 9 remaining meri babu ka birthday 🎂",
+"day 8 remaining meri honey pie ka birthday 📸",
+"day 7 remaining meri heart ka birthday 🎉",
+"day 6 meri rose ka birthday 😊❤️",
+"day 5 remaining meri moon ka birthday 🤭",
+"day 4 remaining meri chocolate ka birthday🥰",
+"day 3 remaining meri maa ki bahu ka birthday 🤍",
+"day 2 remaining meri saasu maa ki beti ka birthday 🤫",
+"day 1 remaining meri shooting start ka birthday 🌙",
+"happy birthday my love of my life 🎂😊❤️"
+];
+
+let timeline = document.getElementById("timeline");
+
+/* START DATE - CHANGE YEAR IF NEEDED */
+let startDate = new Date("February 25, 2026 00:00:00").getTime();
+
+for(let i=1;i<=17;i++){
+
+    let unlockDate = new Date(startDate + (i-1)*24*60*60*1000);
+
+    let side = (i%2==0) ? "right" : "left";
+    let div = document.createElement("div");
+    div.className = "memory "+side;
+
+    div.innerHTML = `
+        <div class="lock-box">
+            <a href="memory${i}.html" id="link${i}" style="pointer-events:none;">
+                <img src="ra${i}.png">
+            </a>
+            <div class="lock-overlay" id="lock${i}">
+                <div class="lock-icon">🔒</div>
+                <div id="timer${i}">Loading...</div>
+            </div>
+        </div>
+        <div class="caption">${captions[i-1]}</div>
+    `;
+
+    timeline.appendChild(div);
+
+    startCountdown(i, unlockDate);
+}
+
+function startCountdown(i, unlockTime){
+
+    let timer = document.getElementById("timer"+i);
+    let lock = document.getElementById("lock"+i);
+    let link = document.getElementById("link"+i);
+
+    let interval = setInterval(function(){
+
+        let now = new Date().getTime();
+        let distance = unlockTime - now;
+
+        if(distance <= 0){
+            clearInterval(interval);
+            lock.style.display = "none";
+            link.style.pointerEvents = "auto";
+            return;
+        }
+
+        let days = Math.floor(distance / (1000*60*60*24));
+        let hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+        let minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+        let seconds = Math.floor((distance % (1000*60))/1000);
+
+        timer.innerHTML =
+        days+"d "+hours+"h "+minutes+"m "+seconds+"s";
+
+    },1000);
+}
+
+</script>
+
+</body>
+</html>
