@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory 3 💝</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#1a0033,#4a148c);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    overflow:hidden;
+    font-family:'Poppins',sans-serif;
+    color:white;
+    text-align:center;
+    transition:background 1s ease;
+}
+
+.img{
+    width:320px;
+    position:absolute;
+    opacity:0;
+    transform:scale(0.9);
+    transition:opacity 1.5s ease, transform 1.5s ease;
+    filter:drop-shadow(0 0 25px rgba(255,255,255,0.4));
+}
+
+.show{
+    opacity:1;
+    transform:scale(1);
+}
+
+.final{
+    top:30px;
+    width:250px;
+}
+
+.message{
+    margin-top:330px;
+    font-size:24px;
+    font-family:'Pacifico',cursive;
+    opacity:0;
+    transition:opacity 2s ease;
+    line-height:1.6;
+    padding:0 20px;
+    text-shadow:0 0 10px rgba(255,255,255,0.6);
+}
+
+.showText{
+    opacity:1;
+}
+
+button{
+    margin-top:25px;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(45deg,#ff4e8a,#ff2f70);
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    opacity:0;
+    transition:opacity 1s ease, transform 0.3s ease;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+.showBtn{
+    opacity:1;
+}
+</style>
+</head>
+
+<body>
+
+<img src="kitkat.png" class="img" id="kit1">
+<img src="kitkat2.png" class="img" id="kit2">
+
+<img src="dairymilk.png" class="img" id="d1">
+<img src="dairymilk2.png" class="img" id="d2">
+
+<img src="ferrero.png" class="img" id="f1">
+<img src="ferrero2.png" class="img" id="f2">
+
+<img src="fuse.png" class="img" id="fu1">
+<img src="fuse2.png" class="img" id="fu2">
+
+<div class="message" id="text"></div>
+<button id="nextBtn">Next 🍫</button>
+
+<script>
+
+let text=document.getElementById("text");
+let btn=document.getElementById("nextBtn");
+let step=1;
+
+let kit1=document.getElementById("kit1");
+let kit2=document.getElementById("kit2");
+let d1=document.getElementById("d1");
+let d2=document.getElementById("d2");
+let f1=document.getElementById("f1");
+let f2=document.getElementById("f2");
+let fu1=document.getElementById("fu1");
+let fu2=document.getElementById("fu2");
+
+btn.onclick=function(){
+    if(step==1){startDairy();step=2;}
+    else if(step==2){startFerrero();step=3;}
+    else if(step==3){startFuse();step=4;}
+};
+
+function clearAll(){
+document.querySelectorAll(".img").forEach(img=>{
+img.classList.remove("show");
+img.classList.remove("final");
+});
+text.classList.remove("showText");
+text.innerHTML="";
+}
+
+function animateChocolate(imgA,imgB,message,bgColor){
+clearAll();
+document.body.style.background=bgColor;
+
+setTimeout(()=>{imgA.classList.add("show");},400);
+setTimeout(()=>{imgA.classList.remove("show");},2600);
+setTimeout(()=>{imgB.classList.add("show");},4200);
+setTimeout(()=>{imgB.classList.remove("show");},6500);
+
+setTimeout(()=>{
+text.innerHTML=message;
+text.classList.add("showText");
+},8000);
+
+setTimeout(()=>{
+imgB.classList.add("show");
+imgB.classList.add("final");
+btn.classList.add("showBtn");
+},9500);
+}
+
+/* Chocolates */
+function startKitkat(){
+animateChocolate(kit1,kit2,
+`You are just like KitKat 🍫<br>
+Sweet at first sight…<br>
+Your gossip and eyes are more crunchy ❤️<br><br>
+You are mind refreshing like KitKat jaan 😊❤️`,
+"linear-gradient(135deg,#1a0033,#4a148c)");
+}
+
+function startDairy(){
+animateChocolate(d1,d2,
+`You are like Dairy Milk 🍫💜<br>
+So smooth… so pure…<br>
+Just love having first bite without lips 💕<br><br>
+Your cheeks and lips melt my heart like Dairy Milk 🫠🤤`,
+"linear-gradient(135deg,#2e003e,#6a1b9a)");
+}
+
+function startFerrero(){
+animateChocolate(f1,f2,
+`Like Ferrero Rocher 🍫✨<br>
+Golden outside… precious inside…<br>
+You are so sweet like your handmade food 🫠😘<br><br>
+Just like you 💛`,
+"linear-gradient(135deg,#3e2723,#795548)");
+}
+
+function startFuse(){
+animateChocolate(fu1,fu2,
+`Like Fuse 🍫🔥<br>
+Crunchy… strong… full of spark…<br>
+Every time I see you my mind gets fuse ❤️<br><br>
+When you send me photo my mind and phone both get fuse with your beauty ❤️🫂😘`,
+"linear-gradient(135deg,#bf360c,#ff7043)");
+
+setTimeout(()=>{
+btn.innerText="Next 💖";
+btn.onclick=startTeddy;
+},10000);
+}
+
+/* Teddy */
+function startTeddy(){
+clearAll();
+btn.style.display="none";
+document.body.innerHTML="";
+
+let teddy=document.createElement("img");
+teddy.src="teddy.gif";
+teddy.style.width="320px";
+teddy.style.marginTop="120px";
+document.body.appendChild(teddy);
+
+setTimeout(()=>{
+document.body.innerHTML="<h2 style='font-family:Pacifico;'>You know what is more sweet than chocolate? 🍫💕</h2>";
+},3000);
+
+setTimeout(()=>{bigKissText();},6000);
+}
+
+function bigKissText(){
+document.body.innerHTML="";
+let div=document.createElement("div");
+div.style.fontFamily="Pacifico";
+div.style.fontSize="34px";
+div.style.marginTop="150px";
+div.innerHTML="Your kiss is more sweet than any sweets or chocolate jaan 💋❤️";
+document.body.appendChild(div);
+
+setTimeout(()=>{showKissImage();},5000);
+}
+
+function showKissImage(){
+document.body.innerHTML="<h2 style='font-family:Pacifico;'>Kiss Me 💋</h2>";
+let img=document.createElement("img");
+img.src="rk1.png";
+img.style.width="320px";
+img.style.cursor="pointer";
+img.style.marginTop="20px";
+document.body.appendChild(img);
+
+img.onclick=function(){
+setTimeout(()=>{finalMessage();},1500);
+}
+}
+
+function finalMessage(){
+document.body.innerHTML=`
+<div style="font-family:Pacifico;padding:40px;">
+
+<img src="kis.gif" style="width:250px;margin-bottom:20px;">
+
+<h1>Happy Birthday in advance my kids mother 🎂💖</h1>
+
+<p style="font-size:20px;margin-top:20px;">
+Chand bhi sharma jaye teri muskaan dekh kar,<br>
+Rab ne tujhe banaya hai meri jaan ke liye khas kar,<br>
+Har khushi tere kadmo mein ho sada,<br>
+Bas tu yunhi muskurati reh meri zindagi bhar 💕
+</p>
+
+<h2 style="margin-top:25px;">I love youuu sooooo much jaan ❤️</h2>
+
+<a href="r1.html">
+<button style="opacity:1;margin-top:20px;">
+Go To Photos Section Jaan 💕
+</button>
+</a>
+
+</div>
+`;
+}
+
+startKitkat();
+
+</script>
+
+</body>
+</html>
