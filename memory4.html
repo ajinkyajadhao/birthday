@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory 4</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:radial-gradient(circle,#3b2a1a,#1a120b);
+    font-family:Georgia, serif;
+    overflow:hidden;
+}
+
+/* SCROLL */
+.scroll-wrapper{
+    width:92%;
+    max-width:600px;
+    position:absolute;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    transition:all 0.8s ease;
+}
+
+/* BARRELS */
+.barrel{
+    width:100%;
+    height:45px;
+    background:linear-gradient(to right,#5c3a1e,#8b5a2b,#5c3a1e);
+    border-radius:50px;
+    box-shadow:
+        inset 0 6px 12px rgba(255,255,255,0.2),
+        inset 0 -6px 12px rgba(0,0,0,0.5),
+        0 8px 15px rgba(0,0,0,0.6);
+}
+
+/* PAPER */
+.paper{
+    width:94%;
+    height:0;
+    background:linear-gradient(#fdf1d0,#f7e3b5);
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,0.2),
+        0 15px 30px rgba(0,0,0,0.6);
+    overflow:hidden;
+    transition:height 1.5s ease;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:0 15px;
+}
+
+.open .paper{
+    height:750px;
+}
+
+.paper-content{
+    opacity:0;
+    transform:translateY(20px);
+    transition:1s ease 1s;
+    color:#4e342e;
+    text-align:center;
+    width:100%;
+}
+
+.open .paper-content{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* VIDEO */
+.video-box{
+    width:100%;
+    margin:15px 0;
+}
+
+.video-box video{
+    width:100%;
+    height:auto;
+    max-height:420px;
+    border-radius:12px;
+    object-fit:contain;
+}
+
+/* GIF */
+.gift-gif{
+    width:100%;
+    max-height:260px;
+    margin-top:15px;
+    border-radius:10px;
+}
+
+/* BUTTON */
+.btn{
+    margin-top:15px;
+    padding:10px 18px;
+    border:none;
+    border-radius:20px;
+    background:#b71c1c;
+    color:white;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#7f0000;
+}
+
+/* CHEST */
+.chest{
+    font-size:65px;
+    margin-top:20px;
+    cursor:pointer;
+    display:none;
+    animation:float 2s infinite ease-in-out;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
+}
+
+/* FINAL SCREEN */
+.final-screen{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle,#ff9a9e,#fad0c4);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+    opacity:0;
+    pointer-events:none;
+    transition:1s;
+    padding:20px;
+}
+
+.final-screen.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.final-screen h1{
+    font-size:28px;
+    margin-bottom:20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIRST SCROLL -->
+<div class="scroll-wrapper" id="scroll1">
+    <div class="barrel"></div>
+    <div class="paper">
+        <div class="paper-content">
+            <h2>This is my best wifey 💖</h2>
+
+            <div class="video-box">
+                <video controls>
+                    <source src="ba1.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <button class="btn" onclick="openStory()">I want to tell you something baby 💌</button>
+            <button class="btn" onclick="openGift()">Proceed to your gift jaan 🎁</button>
+        </div>
+    </div>
+    <div class="barrel"></div>
+</div>
+
+<!-- STORY SCROLL -->
+<div class="scroll-wrapper" id="scrollStory" style="display:none;">
+    <div class="barrel"></div>
+    <div class="paper">
+        <div class="paper-content" id="storyContent"></div>
+    </div>
+    <div class="barrel"></div>
+</div>
+
+<!-- GIFT SCROLL -->
+<div class="scroll-wrapper" id="scrollGift" style="display:none;">
+    <div class="barrel"></div>
+    <div class="paper">
+        <div class="paper-content">
+
+            <h2>For My Beautiful Queen 👑</h2>
+            <p>
+                 <br></br>
+            jaan aapko pata h <br>
+            aapne jabse meri life m aayi ho jaan <br>
+            tabse meri life change ho gayi h <br>
+            ye aalsi ladka aab active ho gaya h <br>
+            m kisi ki baat nai sunta na he kam karta tha <br>
+            par meri queen ke liye sabkarta hu <br>
+            jaan mene kabhi socha nai tha m change ho jaunga matlab<br>
+            m aalsi se aacha ho jaunga pata nai babu kese kiya aapne yesa <br>
+            aap best ho jaan <br>
+            aapko aapne ye bigde hue ladke ko thik kar diya aapo sab kar sakti ho jaan <br>
+            i love you mera bacha ❤️😊😘🫂<br><br>
+            </p>
+
+            <img src="b2.gif" class="gift-gif">
+
+            <button class="btn" onclick="showChest()">Open Your Surprise 💎</button>
+
+            <div class="chest" id="chest" onclick="openFinal()">🎁</div>
+
+        </div>
+    </div>
+    <div class="barrel"></div>
+</div>
+
+<!-- FINAL SCREEN -->
+<div class="final-screen" id="finalScreen">
+    <h1>Happy Birthday in Advance<br>My Kids' Mother ❤️</h1>
+
+    <p>
+    "Tere hone se meri duniya mukammal si lagti hai,<br>
+     Teri awaaz se har subah roshan si lagti hai.<br>
+     Tu saath ho toh mushkilein bhi asaan lagti hain,<br>
+     Tu door ho toh mehfil bhi veeran si lagti hai.<br>
+     Tu sirf meri mohabbat nahi…<br>
+     Meri duaon ka sabse khoobsurat jawaab lagti hai."
+    </p>
+<!-- Cute Animated Final Button -->
+<style>
+@keyframes cuteGlow {
+  0% { box-shadow: 0 0 10px #ff4e9b; transform: scale(1); }
+  100% { box-shadow: 0 0 25px #ff85c1; transform: scale(1.05); }
+}
+</style>
+
+<a href="r1.html" style="text-decoration:none;">
+  <button 
+    style="
+      margin-top:30px;
+      padding:15px 35px;
+      border:none;
+      border-radius:40px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      background:linear-gradient(45deg,#ff4e9b,#ff85c1);
+      color:white;
+      animation:cuteGlow 2s infinite alternate;
+      transition:0.3s ease;
+    "
+    onmouseover="this.style.transform='scale(1.1)'"
+    onmouseout="this.style.transform='scale(1.05)'"
+  >
+    Go To Photo Section Jaan 📸💕
+  </button>
+</a>
+
+    </div>
+<script>
+
+let storyPage = 0;
+
+const storyPages = [
+
+`<h2>Baby… 💖</h2>
+<p>
+From the day you came into my life,
+everything became brighter and more beautiful.
+You are my peace, my happiness,
+and my forever.
+from our relationship begins there i some promise that we dont say but we follow.
+i just remaind my promise that i did to my love 
+</p>`,
+
+`<h2>here is some promise 🌸</h2>
+<p>
+<br></br>
+prmoise 1:- i dont even look or touch other girl exacpt you and our daughter ❤️,<br>
+prmoise 2:- when we are out i always protect you jaan 😊<br>
+prmoise 3:- when ever your in pain i cook for you jaan 😊❤️<br>
+promise 4:- i make shoure when your angry i give you always confert <br>
+prmoise 5:- when your angry i hug you and make you calm and give you comfort that you get when your on my laps 🫂😊<br>
+promise 6:- when ever i go out i kiss you if i forgot then i bring some gift for you ❤️<br>
+prmoise 7:- when we both fight i dont raise my voice on you jaan <br>
+prmoise 8:- when we fight i dont raise my hand on you jaan in our entire life after life also i dont raise my hands on you betu <br>
+prmoise 9:- when you get tired i we both go out and enjoy betu <br>
+prmoise 10:- when you make some mistake i take that on myself 😊<br>
+prmoise 11:- when i make you pregnent  i make sure your cravings is fullfil 😊<br>
+prmoise 12:- when your in your periods i make sure  you dont do any work and give food and all things on place❤️😊<br>
+prmoise 13:- when mom scrolled you i save you there 😊<br>
+prmoise 14:- i try to make your all dream complete <br>
+prmoise 15:- we go to your every fav destination and fly over the worls ❤️😊<br>
+prmoise 16:- after our marrige first place we visit is amritsar ❤️😊<br>
+prmoise 17:- and in amritsar  from there i hold you in my arms and take you till golden temple 😊❤️
+</p>`,
+
+`<h2>some thing thta i have to say bacha </h2>
+<p>
+<br></br>
+aagar aapke pass se mummy ji ya papa ji ne phone le liya.<br>
+to ye sochke overthink nai karna jaan ki.<br>
+kahi chal jaunga ya fir dur ho jaunga .<br>
+nai betu m aapka hu hamesha aapka he rahunga hamesha <br>
+aapke pass se phone le bhi liya to bhi m wahi hu aapka hu hamesha jaan <br>
+aapko kabhi aakela nai choda h jaan na chodunga <br>
+aapko kabhi overthinking hui to direct call kar dena bacha mera no to aapke pass rehta he h <br>
+m kabhi ring jane nai dunag 1 ring opar he call utha lunga aapko jab lage tab call kar dena babu <br>
+or bacha dont ek baat <br>
+i love you ♾️ mere bacho ki maa 😊❤️😘🫂<br><br>
+ </p>`,
+
+`<h2>And One More Thing… ❤️</h2>
+<p>
+<br></br>
+babu aapko pata h mere liye sabse best day konsa h<br> 
+meri wifey ka birthday jab aap ye duniya m aayi mere liye sabse best day h or jab aap mili<br>
+aapke sath bitaya hua har ek paal mere liye best h jaan 😊<br>
+i love you soo much jaan ❤️🫂😘😊<br><br>
+</p>`
+];
+
+window.onload = () => {
+    document.getElementById("scroll1").classList.add("open");
+};
+
+function switchScroll(from, to){
+    let current = document.getElementById(from);
+    current.classList.remove("open");
+
+    setTimeout(()=>{
+        current.style.display="none";
+        let next = document.getElementById(to);
+        next.style.display="flex";
+        setTimeout(()=>{
+            next.classList.add("open");
+        },200);
+    },700);
+}
+
+function openStory(){
+    switchScroll("scroll1","scrollStory");
+    storyPage = 0;
+    renderStoryPage();
+}
+
+function renderStoryPage(){
+
+    let content = storyPages[storyPage];
+    let buttons = "";
+
+    if(storyPage > 0){
+        buttons += `<button class="btn" onclick="prevPage()">⬅ Previous</button>`;
+    }
+
+    if(storyPage < storyPages.length - 1){
+        buttons += `<button class="btn" onclick="nextPage()">Next ➡</button>`;
+    } else {
+        buttons += `<button class="btn" onclick="openGiftFromStory()">Proceed to Your Gift 🎁</button>`;
+    }
+
+    document.getElementById("storyContent").innerHTML = `
+        ${content}
+        <div style="margin-top:20px;">
+            ${buttons}
+        </div>
+    `;
+}
+
+function nextPage(){
+    storyPage++;
+    renderStoryPage();
+}
+
+function prevPage(){
+    storyPage--;
+    renderStoryPage();
+}
+
+function openGift(){
+    switchScroll("scroll1","scrollGift");
+}
+
+function openGiftFromStory(){
+    switchScroll("scrollStory","scrollGift");
+}
+
+function showChest(){
+    document.getElementById("chest").style.display="block";
+}
+
+function openFinal(){
+    document.getElementById("finalScreen").classList.add("show");
+}
+
+</script>
+
+</body>
+</html>
