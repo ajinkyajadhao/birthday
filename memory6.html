@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory 6 - 11 Days Left ❤️</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  background:radial-gradient(circle at top,#14001a,#000);
+  color:white;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  transition:1s;
+}
+
+/* Sparkle stars */
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  border-radius:50%;
+  animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+  from{opacity:0.2;}
+  to{opacity:1;}
+}
+
+/* Crown */
+.crown{
+  position:absolute;
+  top:12%;
+  font-size:40px;
+  animation:floatCrown 3s ease-in-out infinite;
+}
+@keyframes floatCrown{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+  100%{transform:translateY(0);}
+}
+
+/* Content Box */
+.content{
+  max-width:85%;
+  opacity:1;
+  transition:1s;
+}
+
+h1{
+  font-size:30px;
+  color:#ff4dd2;
+  text-shadow:0 0 10px #ff4dd2,0 0 25px #ff1ac6;
+  margin-bottom:20px;
+}
+
+p{
+  font-size:18px;
+  line-height:1.7;
+  color:#ffb3ec;
+}
+
+/* Button */
+.btn{
+  margin-top:25px;
+  padding:12px 25px;
+  background:#ff1ac6;
+  border:none;
+  border-radius:30px;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 0 15px #ff1ac6;
+  transition:0.3s;
+  text-decoration:none;
+  display:inline-block;
+}
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 30px #ff4dd2;
+}
+
+/* Floating Hearts */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  color:#ff4dd2;
+  animation:floatUp 6s linear infinite;
+}
+@keyframes floatUp{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-110vh);opacity:0;}
+}
+
+/* Fade */
+.fade-out{
+  opacity:0;
+}
+
+/* Final Birthday Style */
+.birthday{
+  font-size:36px;
+  color:#ff66ff;
+  text-shadow:0 0 20px #ff1ac6;
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{text-shadow:0 0 15px #ff4dd2;}
+  to{text-shadow:0 0 40px #ff1ac6;}
+}
+
+.shayari{
+  margin-top:20px;
+  font-size:20px;
+  line-height:1.8;
+  color:#ffd6f9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="crown">👑</div>
+
+<div class="content" id="section">
+
+<h1>Only 11 Days Left… ❤️</h1>
+
+<p>
+<br></br>
+There are only 11 days left until the most beautiful soul entered this world. <br>
+The day that unknowingly changed my entire life. I know it’s not your birthday yet, <br>
+but my heart has already started celebrating you. You may think I’m calm, normal, <br>
+and not planning anything… but secretly I’m preparing something unforgettable. <br>
+This year won’t be ordinary, because you are not ordinary<br>
+.You are my Queen.
+</p>
+
+
+<button class="btn" onclick="nextSection()">Tap The Secret 💝</button>
+
+</div>
+
+<script>
+
+/* Midnight Sparkles */
+for(let i=0;i<70;i++){
+  const star=document.createElement("div");
+  star.classList.add("star");
+  star.style.top=Math.random()*100+"vh";
+  star.style.left=Math.random()*100+"vw";
+  star.style.animationDuration=(1+Math.random()*3)+"s";
+  document.body.appendChild(star);
+}
+
+/* Floating Hearts */
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="❤";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(15+Math.random()*20)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>{heart.remove();},6000);
+},600);
+
+/* Sections Content */
+const sections = [
+
+`<h1>kya lagaya tha jaan surprise kese hoge 😏💖</h1>
+<p>
+<br></br>
+For the next 11 days, I will quietly smile knowing that your special day is coming closer.<br>
+Every single second feels exciting because I know I get to celebrate the most important<br>
+person in my life. You deserve more than surprises — you deserve magic.
+</p>
+<button class="btn" onclick="nextSection()">Next 💞</button>`,
+
+`<h1>my hearts talks❤️😊✨</h1>
+<p>
+<br></br>
+Sometimes I wonder how one person can mean so much. Your smile fixes my worst days.<br>
+Your voice feels like comfort. Your presence feels like home. That’s why this birthday<br>
+won’t just be about cake and candles… it will be about celebrating you.
+</p>
+<button class="btn" onclick="nextSection()">Continue 👑</button>`,
+
+`<h1>most excited person for my wifeys bithday❤️😊🌙</h1>
+<p>
+<br></br>
+I want this birthday to remind you how loved you are. Not just by the world,<br>
+but by me — in ways words can’t fully explain. I am counting these days in my heart,<br>
+even if there is no visible countdown on the screen.
+</p>
+<button class="btn" onclick="nextSection()">One More 💫</button>`,
+
+`<h1>Final msg jaan 😊❤️💝</h1>
+<p>
+<br></br>
+So until the real day arrives, keep smiling and keep guessing. Because when the clock<br>
+finally strikes your birthday, you will see how deeply you are loved. And trust me…<br>
+this is just the beginning.
+</p>
+<button class="btn" onclick="showBirthday()">Open Final Surprise 🎂</button>`
+];
+
+let index = 0;
+
+function nextSection(){
+  const container = document.getElementById("section");
+  container.classList.add("fade-out");
+
+  setTimeout(()=>{
+    container.innerHTML = sections[index];
+    container.classList.remove("fade-out");
+    index++;
+  },800);
+}
+
+function showBirthday(){
+  const container = document.getElementById("section");
+  container.classList.add("fade-out");
+
+  setTimeout(()=>{
+    container.innerHTML = `
+      <div class="birthday">Happy Birthday My Love in advance 🎂❤️</div>
+
+      <div class="shayari">
+      Teri muskurahat meri pehchaan hai,<br>
+      Teri khushi meri jaan hai,<br>
+      Tere bina sab adhura sa lagta hai,<br>
+      Kyunki tu hi meri duniya, tu hi meri shaan hai. 💖
+      </div>
+
+      <a href="r1.html" class="btn">
+      Go To Photo Section My Wifey 💕
+      </a>
+    `;
+    container.classList.remove("fade-out");
+  },800);
+}
+
+</script>
+
+</body>
+</html>
