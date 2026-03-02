@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory 7 - Holi Special 💖</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  background:linear-gradient(135deg,#fff6fb,#f0f8ff);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:relative;
+}
+
+/* COLOR RAIN */
+.colorDrop{
+  position:absolute;
+  width:12px;
+  height:25px;
+  border-radius:10px;
+  opacity:0.6;
+  animation:rain 4s linear forwards;
+  pointer-events:none;   /* VERY IMPORTANT */
+}
+
+@keyframes rain{
+  0%{transform:translateY(-50px);}
+  100%{transform:translateY(110vh);}
+}
+
+/* Container */
+.container{
+  max-width:90%;
+  opacity:0;
+  transform:translateY(20px);
+  transition:0.8s;
+  z-index:10;
+}
+
+.container.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+img{
+  width:220px;
+  border-radius:18px;
+  margin-bottom:25px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.12);
+}
+
+.title{
+  font-size:28px;
+  color:#ff4d6d;
+  margin-bottom:18px;
+}
+
+.sub{
+  font-size:17px;
+  color:#555;
+  line-height:1.9;
+  margin-bottom:30px;
+}
+
+.btn{
+  padding:12px 28px;
+  background:#ff4d6d;
+  border:none;
+  border-radius:30px;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 10px 25px rgba(255,77,109,0.4);
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="main" class="container active">
+
+<img src="ha.gif">
+<div class="title">The Day We Played With Colors 🌈</div>
+<div class="sub">
+That Holi felt different. When I put colors on your face,
+I didn’t just see shades — I saw our future.  
+
+Pink looked beautiful… but not more than your blush.  
+Red looked romantic… but not more than your love.  
+Yellow felt warm… but not more than your presence.  
+
+And now… only 10 days left until your birthday.  
+My heart is already celebrating you quietly. 💖
+</div>
+<button class="btn" onclick="nextSection()">Next 💞</button>
+
+</div>
+
+<script>
+
+/* COLOR RAIN EFFECT */
+const rainColors=["#ff4d6d","#ffbe0b","#3a86ff","#8338ec","#06d6a0"];
+
+setInterval(()=>{
+  const drop=document.createElement("div");
+  drop.classList.add("colorDrop");
+  drop.style.background=rainColors[Math.floor(Math.random()*rainColors.length)];
+  drop.style.left=Math.random()*100+"vw";
+  drop.style.animationDuration=(3+Math.random()*2)+"s";
+  document.body.appendChild(drop);
+
+  setTimeout(()=>{
+    drop.remove();
+  },4000);
+
+},150);
+
+
+/* SECTIONS */
+let index=0;
+
+const sections=[
+
+`<img src="ha.gif">
+<div class="title">Only 10 Days Left For My Queen 👑</div>
+<div class="sub">
+Only 10 days left until the world celebrates you…
+but my heart started celebrating long ago.  
+
+Your birthday is not just a date.
+It is the day my happiness was born somewhere in this universe.  
+
+I may not show excitement loudly,
+but inside me — there’s a silent countdown running every second. 💝
+</div>
+<button class="btn" onclick="nextSection()">Next 🎨</button>`,
+
+`<img src="ha.gif">
+<div class="title">Holi With You Felt Magical ✨</div>
+<div class="sub">
+Holi is about colors, laughter and happiness.
+But with you… it felt deeper.  
+
+When colors touched your face,
+I wished our life always stays this colorful.  
+
+If life ever tries to fade our happiness,
+I promise to bring new shades of love for you. 💕
+</div>
+<button class="btn" onclick="nextSection()">Next 💖</button>`,
+
+`<img src="ha.gif">
+<div class="title">You Are My Forever Festival 🌸</div>
+<div class="sub">
+People wait for festivals to feel special.
+But I don’t need festivals…  
+
+Because your presence itself feels like celebration.  
+
+You are my calm in chaos,
+my smile in sadness,
+my forever happiness. 💗
+</div>
+<button class="btn" onclick="nextSection()">Final 💝</button>`,
+
+`<img src="ha.gif">
+<div class="title">Happy Birthday In Advance Meri Voti 🎂💗</div>
+<div class="sub">
+Only 10 days left…
+and I already feel excited like a kid waiting for a surprise.  
+
+May your life stay bright like Holi colors,
+warm like sunlight,
+pure like white peace,
+and endless like my love for you.  
+
+This Holi… I don’t just throw colors.
+I throw my whole heart to you. ❤️
+</div>
+<button class="btn" onclick="goToPhotos()">
+Go To Photo Section Meri Voti 📸
+</button>`
+
+];
+
+function nextSection(){
+  const container=document.getElementById("main");
+  container.classList.remove("active");
+
+  setTimeout(()=>{
+    if(index < sections.length){
+      container.innerHTML=sections[index];
+      container.classList.add("active");
+      index++;
+    }
+  },500);
+}
+
+function goToPhotos(){
+  window.location.href="r1.html";
+}
+
+</script>
+
+</body>
+</html>
