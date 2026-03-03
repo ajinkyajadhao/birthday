@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory 8 💕</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+body{
+  height:100vh;
+  background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  overflow:hidden;
+}
+
+.container{
+  width:90%;
+  max-width:600px;
+  color:white;
+}
+
+.fade{animation:fadeIn 1s ease forwards;}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.big{font-size:28px;font-weight:bold;margin-bottom:20px;}
+.sub{font-size:18px;line-height:1.7;margin:15px 0;}
+
+.btn{
+  margin-top:20px;
+  padding:12px 28px;
+  background:#ff4d6d;
+  border:none;
+  border-radius:30px;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.btn:hover{transform:scale(1.1);}
+
+.glow{
+  animation:glow 1.5s infinite alternate;
+}
+@keyframes glow{
+  from{box-shadow:0 0 10px #fff;}
+  to{box-shadow:0 0 25px #fff;}
+}
+
+img{
+  width:230px;
+  margin:15px 0;
+  border-radius:15px;
+}
+
+.slide-img{display:none;}
+.slide-img.active{display:block;animation:fadeIn 1s;}
+</style>
+</head>
+
+<body>
+
+<div id="main" class="container"></div>
+
+<script>
+
+let main=document.getElementById("main");
+
+/* INTRO */
+
+let introStep=0;
+const introSlides=[
+
+`<div class="big fade">Baby.....</div>`,
+
+`<div class="big fade">Sorry Jaan 🥺</div>
+<img src="img1.png" class="fade">
+<div class="sub fade">
+Aaj main itna drama kar raha hu jaise sach me gift bhool gaya hoon...  
+par andar se na dil thoda sharma bhi raha hai 😅
+</div>`,
+
+`<div class="sub fade">
+Sach bataun? Subah se sirf yahi soch raha tha ki  
+tumko kaise surprise karu...  
+aur tum ho ki turant bol diya "gift bhool gaye na?" 😭😂
+</div>`
+];
+
+function runIntro(){
+  if(introStep<introSlides.length){
+    main.innerHTML=introSlides[introStep];
+    introStep++;
+    setTimeout(runIntro,2500);
+  }else{
+    main.innerHTML+=`<button class="btn" onclick="revealTruth()">Sorry 🥺</button>`;
+  }
+}
+
+/* Reveal */
+
+function revealTruth(){
+  main.innerHTML=`
+  <div class="big fade">You really think jaan I forgot your gift? 😏</div>
+  <div class="sub fade">
+  Main bhool sakta hoon khana...  
+  bhool sakta hoon password...  
+  par tumhara special din? NEVER 😎❤️
+  </div>
+  <button class="btn" onclick="startFood()">Next</button>`;
+}
+
+/* FOOD STORY */
+
+let pageIndex=0;
+const foodPages=[
+
+`<div class="big fade">Street Food Dates 🌮</div>
+<div class="sub fade">
+Yaad hai jab hum pani puri share karte hain  
+aur tum last wala extra masala wala secretly kha jaati ho? 😆  
+Aur phir cute sa face bana ke bolti ho "maine nahi khaya" 😂
+</div>
+<button class="btn" onclick="nextFood()">Next</button>`,
+
+`<div class="big fade">Midnight Cravings 🍜</div>
+<div class="sub fade">
+Raat ke 1 baje tumhara message aata hai "bhook lagi hai..."  
+Aur mera dimaag kehta hai so jao...  
+Par dil kehta hai jacket pehno aur niklo 😌❤️
+</div>
+<button class="btn" onclick="nextFood()">Next</button>`,
+
+`<div class="big fade">Sweet Like You 🍰</div>
+<div class="sub fade">
+Chocolate sweet hai, cake sweet hai...  
+par jab tum meri plate se bina puchhe bite le leti ho na...  
+wo moment duniya ka sabse sweet hota hai 😜💕
+</div>
+<button class="btn" onclick="nextFood()">Next</button>`,
+
+`<div class="big fade">My Real Gift 🎁</div>
+<div class="sub fade">
+Mera asli gift koi object nahi hai...  
+Mera gift ek promise hai —  
+ki future me hum har city ka street food try karenge  
+aur har bite me ek nayi memory banayenge ❤️
+</div>
+<button class="btn glow" onclick="showCraving()">Have a Craving Jaan 🍕</button>`
+];
+
+function startFood(){pageIndex=0;nextFood();}
+function nextFood(){
+  if(pageIndex<foodPages.length){
+    main.innerHTML=foodPages[pageIndex];
+    pageIndex++;
+  }
+}
+
+/* IMAGE SLIDESHOW */
+
+let slideInterval;
+
+function showCraving(){
+  main.innerHTML=`
+  <div class="big fade">Your Craving Items 😋</div>
+  <img src="img2.png" class="slide-img active">
+  <img src="img3.png" class="slide-img">
+  <img src="img4.png" class="slide-img">
+  <img src="img5.jpg" class="slide-img">
+  <button class="btn glow" onclick="showFinal()">Eat Now Jaan 😋</button>
+  `;
+  startSlide();
+}
+
+function startSlide(){
+  let slides=document.querySelectorAll(".slide-img");
+  let index=0;
+
+  clearInterval(slideInterval);
+  slideInterval=setInterval(()=>{
+    slides.forEach(s=>s.classList.remove("active"));
+    index=(index+1)%slides.length;
+    slides[index].classList.add("active");
+  },2000);
+}
+
+/* FINAL */
+
+function showFinal(){
+  clearInterval(slideInterval);
+  main.innerHTML=`
+  <div class="big fade">Happy Birthday in Advance ❤️</div>
+  <div class="sub fade">
+   Tere saath har food special ho jata hai,<br>
+  Har bite me pyaar mil jata hai,<br>
+  Pizza bhi sharma jaye tere saamne,<br>
+  Kyunki tu hi meri life ka favourite taste hai 😘💕<br><br>
+  Aur yaad rakhna...  <br><br>
+  future me jitni bhi cravings hongi na, <br><br> 
+  main hamesha tumhara delivery boy banne ko ready hoon 😎❤️<br><br>
+  jaan m janta hu aab baat kam hogi or betu aap msg karogi<br><br>
+  tab he m msg karunga warna aapko daat pad jayegi issi liye<br><br>
+  betu sochna nai m thik he rehta hu aap jo ho jaan mere sath <br><br>
+  or bacha m sab kar lunga time se aap tension nai lena <br><br>
+  i love you soo myc meri wifey 😊❤️🫂😘
+  </div>
+  <button class="btn glow" onclick="window.location.href='r1.html'">
+  Go To Photo Section Jaan 📸
+  </button>
+  `;
+}
+
+runIntro();
+
+</script>
+
+</body>
+</html>
