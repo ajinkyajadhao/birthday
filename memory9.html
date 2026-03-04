@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>meri pyari cutie pie 🧸💕</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+body{
+  min-height:100vh;
+  background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  overflow:hidden;
+}
+
+.container{
+  width:90%;
+  max-width:700px;
+  color:white;
+}
+
+.big{font-size:28px;font-weight:bold;margin:20px 0;}
+.sub{font-size:18px;line-height:1.8;margin:20px 0;}
+
+.fadeIn{animation:fadeIn 0.8s forwards;}
+.fadeOut{animation:fadeOut 0.6s forwards;}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+@keyframes fadeOut{
+  to{opacity:0;transform:translateY(-20px);}
+}
+
+.btn{
+  margin:25px 0;
+  padding:12px 30px;
+  background:#ff6fa5;
+  border:none;
+  border-radius:40px;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.btn:hover{transform:scale(1.1);}
+
+.row{
+  display:flex;
+  align-items:center;
+  margin:25px 0;
+}
+.row img{
+  width:150px;
+  border-radius:20px;
+}
+.row p{
+  flex:1;
+  padding:0 15px;
+  font-size:16px;
+  line-height:1.6;
+}
+
+.left{flex-direction:row;}
+.right{flex-direction:row-reverse;}
+
+@media(max-width:600px){
+  .row{flex-direction:column;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="main" class="container"></div>
+
+<script>
+
+let main=document.getElementById("main");
+let step=0;
+
+/* SHOW FUNCTION (vanish old → show new) */
+function showContent(content){
+  main.classList.add("fadeOut");
+
+  setTimeout(()=>{
+    main.innerHTML = content;
+    main.classList.remove("fadeOut");
+    main.classList.add("fadeIn");
+  },500);
+}
+
+/* INTRO */
+showContent(`
+<div class="big">meri pyari cutie pie 🧸💕</div>
+<div class="sub">
+Aaj ki memory thodi soft hai...  
+thodi cute hai...  
+bilkul aapki tarah 😌💕</div>
+<button class="btn" onclick="nextStep()">Start 🧸</button>
+`);
+
+function nextStep(){
+step++;
+
+/* STEP 1 */
+if(step==1){
+showContent(`
+<div class="row left">
+<img src="teddy1.png">
+<p>
+Jab aap teddy ko hug karti ho na...  
+mujhe lagta hai kaash main wo teddy hota 😌  
+taaki tum mujhe itna tight pakad ke rakhti 🧸💕
+or m wo teddy ko fek deta 😤
+</p>
+</div>
+<button class="btn" onclick="nextStep()">Next 💕</button>
+`);
+}
+
+/* STEP 2 */
+else if(step==2){
+showContent(`
+<div class="row right">
+<img src="teddy2.png">
+<p>
+Teddy cute hota hai...  
+par tum usse bhi zyada cute ho 🥰  
+wo cotton se bana hai...  
+aap toh pure dil se bani ho ❤️
+</p>
+</div>
+<button class="btn" onclick="nextStep()">Next 💕</button>
+`);
+}
+
+/* STEP 3 */
+else if(step==3){
+showContent(`
+<div class="row left">
+<img src="teddy3.png">
+<p>
+Jab aap udaas hoti ho aur teddy ko paas rakhti ho,  
+tab main bas yahi sochta hoon...  
+ek din main tumhara real comfort banunga 🤗💕
+or ye bhi ki kese himmat hui meri jaan ko touch karne ki wo teddy ki to 
+</p>
+</div>
+<button class="btn" onclick="nextStep()">Next 💕</button>
+`);
+}
+
+/* STEP 4 */
+else if(step==4){
+showContent(`
+<div class="row right">
+<img src="teddy4.png">
+<p>
+Teddy silent hota hai...  
+par main tumhe hasa sakta hoon 😏  
+Teddy soft hota hai...  
+par main aapko protect bhi kar sakta hoon 💕
+</p>
+</div>
+<button class="btn" onclick="nextStep()">Next 💕</button>
+`);
+}
+
+/* STEP 5 */
+else if(step==5){
+showContent(`
+<div class="sub">
+🧸 Shayri For My honey pie 🧸 <br><br>
+Teddy sa soft tera pyar lage,  
+Har raat tera khayal saath lage,  
+aap muskura de toh duniya rangeen lage,  
+aap paas ho toh har sapna sa lage 💕
+</div>
+<button class="btn" onclick="nextStep()">Next 💖</button>
+`);
+}
+
+/* STEP 6 */
+else if(step==6){
+showContent(`
+<div class="big">Happy Birthday In Advance My Honey Pie 😊💕</div>
+<div class="sub">
+Jab duniya thodi si thakane lage,  
+aur raatein thodi si suni lage,  
+bas apni aankhen band kar lena jaan...  
+
+main wahi milunga,  
+aapki har muskurahat ke peeche,  
+aapki har dua ke andar,  
+aur aapki har birthday wish ke saath 💕  
+
+Happy Birthday in advance meri jaan...  
+aap meri duniya ka sabse pyara hissa ho 🧸❤️</div>
+<button class="btn" onclick="nextStep()">Next 💕</button>
+`);
+}
+
+/* STEP 7 */
+else if(step==7){
+showContent(`
+<div class="sub">
+Jab bhi duniya thodi rough lage,  
+ya life thodi tough lage,  
+bas yaad rakhna...  
+aapka ek pagal sa ladka hamesha aapke saath khada hai 😌💕
+</div>
+
+<button class="btn" onclick="window.location.href='r1.html'">
+Go To Photo Section My Love 📸
+</button>
+`);
+}
+
+}
+
+</script>
+
+</body>
+</html>
