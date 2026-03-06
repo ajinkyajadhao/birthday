@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory 11 🌍</title>
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+body{
+min-height:100vh;
+background:linear-gradient(135deg,#74ebd5,#9face6);
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+overflow-x:hidden;
+}
+
+.container{
+width:90%;
+max-width:700px;
+color:white;
+}
+
+.big{
+font-size:30px;
+font-weight:bold;
+margin:20px 0;
+}
+
+.sub{
+font-size:18px;
+line-height:1.8;
+margin:20px 0;
+}
+
+.fade{
+animation:fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.btn{
+margin:25px 0;
+padding:12px 30px;
+background:#ff4d6d;
+border:none;
+border-radius:40px;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.1);
+}
+
+.row{
+display:flex;
+align-items:center;
+margin:30px 0;
+}
+
+.row img{
+width:170px;
+border-radius:20px;
+}
+
+.row p{
+flex:1;
+padding:0 15px;
+font-size:17px;
+line-height:1.6;
+}
+
+.left{flex-direction:row;}
+.right{flex-direction:row-reverse;}
+
+@media(max-width:600px){
+.row{flex-direction:column;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="main" class="container"></div>
+
+<script>
+
+let main=document.getElementById("main");
+let step=0;
+
+/* INTRO */
+
+main.innerHTML=`
+
+<div class="big fade">Memory 11 🌍</div>
+
+<div class="sub fade">
+
+Aaj ki memory thodi different hai  
+
+yeh past ki nahi...  
+
+yeh **future dreams ki memory hai** ✨  
+
+wo saare places  
+jahan main aapke saath jaana chahta hoon  
+
+long drives  
+mountains  
+mandir visits  
+world travel  
+
+aur woh sab moments  
+jo main sirf **aapke saath experience karna chahta hoon ❤️**
+
+</div>
+
+<button class="btn" onclick="nextStep()">Start Our Dream Trip ✈️</button>
+
+`;
+
+function nextStep(){
+
+step++;
+
+/* THAR RIDE */
+
+if(step==1){
+
+main.innerHTML=`
+
+<div class="row left fade">
+
+<img src="t1.gif">
+
+<p>
+
+Sabse pehle  
+
+**Thar long drive** 🚙  
+
+Imagine karo  
+
+main driving kar raha hoon  
+aur aap passenger seat pe  
+
+loud music chal raha hai  
+windows open  
+
+aur hum bas  
+**random roads pe travel kar rahe hain**  
+
+without destination  
+without tension  
+
+sirf main aur aap ❤️
+
+</p>
+
+</div>
+
+<button class="btn" onclick="nextStep()">Next 🌍</button>
+
+`;
+
+}
+
+/* MOUNTAINS */
+
+else if(step==2){
+
+main.innerHTML=`
+
+<div class="row right fade">
+
+<img src="t2.gif">
+
+<p>
+
+Phir ek din  
+
+hum **mountains trip** pe jayenge 🏔️  
+
+thandi hawa  
+clouds  
+chai  
+aur long walks  
+
+Aur main secretly photos le raha honga  
+kyunki mountains ke saamne  
+
+**aap aur bhi zyada beautiful lagogi ❤️**
+
+</p>
+
+</div>
+
+<button class="btn" onclick="nextStep()">Next 🏔️</button>
+
+`;
+
+}
+
+/* AMRITSAR */
+
+else if(step==3){
+
+main.innerHTML=`
+
+<div class="row left fade">
+
+<img src="t3.gif">
+
+<p>
+
+Phir hum jayenge  
+
+**Amritsar** 🙏  
+
+Golden Temple  
+
+shanti  
+prayers  
+aur ek beautiful moment  
+
+jahan main quietly  
+bas ek hi wish karunga  
+
+ki **hum dono hamesha saath rahein ❤️**
+
+</p>
+
+</div>
+
+<button class="btn" onclick="nextStep()">Next ✨</button>
+
+`;
+
+}
+
+/* WORLD TRAVEL */
+
+else if(step==4){
+
+main.innerHTML=`
+
+<div class="row right fade">
+
+<img src="t4.gif">
+
+<p>
+
+Aur phir  
+
+hum **world travel** karenge 🌍  
+
+Paris  
+Switzerland  
+Dubai  
+Japan  
+
+har country mein  
+
+main bas ek hi cheez dekhunga  
+
+**aapki khushi ❤️**
+
+</p>
+
+</div>
+
+<button class="btn" onclick="nextStep()">Next 🌎</button>
+
+`;
+
+}
+
+/* DISNEY DREAM */
+
+else if(step==5){
+
+main.innerHTML=`
+
+<div class="row left fade">
+
+<img src="t5.gif">
+
+<p>
+
+Aur phir aayega  
+
+**Disneyland photoshoot day** 🎡  
+
+princess dress  
+castle background  
+aur aapki cutest smile  
+
+Aur us din  
+
+main seriously bolunga  
+
+"Princess mil gayi mujhe" 👑
+
+</p>
+
+</div>
+
+<button class="btn" onclick="nextStep()">Next 💕</button>
+
+`;
+
+}
+
+/* SHAYRI */
+
+else if(step==6){
+
+main.innerHTML=`
+
+<div class="sub fade">
+
+Safar khoobsurat tab lagta hai  
+jab saath sahi insaan ka ho  
+
+Duniya ke har sheher ka kya karna  
+
+agar mere paas  
+**aapka saath na ho ❤️**
+
+</div>
+
+<button class="btn" onclick="nextStep()">Final Memory ✨</button>
+
+`;
+
+}
+
+/* FINAL */
+
+else if(step==7){
+
+main.innerHTML=`
+
+<div class="big fade">
+Our Journey Will Be Beautiful ❤️
+</div>
+
+<div class="sub fade">
+
+Aaj yeh sab sirf dreams hain  
+
+Par ek din  
+
+yeh sab **real memories banenge**  
+
+Aur jab banenge  
+
+toh main har jagah ek photo loonga  
+
+sirf isliye  
+
+taaki main bol saku  
+
+"Yeh sab safar  
+meri favourite girl ke saath hua tha ❤️"
+
+</div>
+
+<button class="btn" onclick="showLove()">One More Thing 💖</button>
+
+`;
+
+}
+
+/* LOVE SCREEN */
+
+}
+
+function showLove(){
+
+main.innerHTML=`
+
+<div style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffd1dc);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+padding:20px;
+">
+
+<div style="
+font-size:50px;
+font-weight:bold;
+line-height:1.4;
+text-shadow:0 0 20px rgba(255,0,120,0.9);
+">
+
+ HAPPY BIRTHDAY IN ADVANCE MY PRINCESS <br>
+I LOVE YOU MY PRINCESS ❤️ <br>
+Duniya ke map par<br><br>
+hazaaron jagah hongi,<br>
+
+par meri favourite destination<br>
+sirf tum ho meri princess. ❤️
+</div>
+
+<button class="btn" onclick="window.location.href='r1.html'" style="margin-top:40px;font-size:18px;padding:15px 40px;">
+Go To Photo Section My Cutie Pie 📸
+</button>
+
+</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>
