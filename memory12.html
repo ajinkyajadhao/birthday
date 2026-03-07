@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory 12 💌</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+background:linear-gradient(135deg,#ff9a9e,#fbc2eb,#a18cd1,#fad0c4);
+background-size:400% 400%;
+animation:bgmove 10s infinite alternate;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+overflow-x:hidden;
+}
+
+@keyframes bgmove{
+0%{background-position:left;}
+100%{background-position:right;}
+}
+
+.container{
+width:90%;
+max-width:700px;
+color:white;
+}
+
+.big{
+font-size:32px;
+font-weight:bold;
+margin:20px 0;
+}
+
+.sub{
+font-size:18px;
+line-height:1.8;
+margin:20px 0;
+}
+
+.fade{
+animation:fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.btn{
+margin:25px 0;
+padding:12px 30px;
+background:#ff4d6d;
+border:none;
+border-radius:40px;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.1);
+}
+
+.timer{
+font-size:28px;
+font-weight:bold;
+margin:20px 0;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="main" class="container"></div>
+
+<script>
+
+let main=document.getElementById("main");
+let step=0;
+
+main.innerHTML=`
+
+<div class="big fade">Memory 12 💌</div>
+
+<div class="sub fade">
+Ab tak humne kaafi memories dekh li  
+cute moments  
+future dreams  
+aur saari feelings ❤️  
+
+Lekin ab ek din aane wala hai  
+jo sabse special hone wala hai  
+aur jiska mujhe bohot wait hai 💖
+</div>
+
+<button class="btn" onclick="nextStep()">Next 💖</button>
+
+`;
+
+function nextStep(){
+
+step++;
+
+if(step==1){
+
+main.innerHTML=`
+
+<div class="sub fade">
+Ek din jo mere liye duniya ka sabse special din hai  
+
+Kyuki us din  
+meri favourite girl ka birthday hai ❤️  
+
+Aur main us din ka wait  
+bilkul ek excited bachche ki tarah kar raha hu 💫
+</div>
+
+<button class="btn" onclick="nextStep()">Reveal Date 🎂</button>
+
+`;
+
+}
+
+else if(step==2){
+
+main.innerHTML=`
+
+<div class="big fade">
+13 March 🎂
+</div>
+
+<div class="sub fade">
+Bas kuch din aur...  
+
+Phir aayega wo din  
+jab meri princess ka birthday hoga 👑  
+
+Aur us din  
+main aapko sabse special feel karwana chahta hu ❤️
+</div>
+
+<button class="btn" onclick="nextStep()">See Countdown ⏳</button>
+
+`;
+
+}
+
+else if(step==3){
+
+main.innerHTML=`
+
+<div class="big fade">
+Countdown To 13 March ⏳
+</div>
+
+<div id="countdown" class="timer"></div>
+
+<div class="sub fade">
+Har second ke saath  
+13 March aur kareeb aa raha hai ❤️  
+
+Aur mera excitement bhi badh raha hai 💖
+</div>
+
+<button class="btn" onclick="nextStep()">Next 💌</button>
+
+`;
+
+startCountdown();
+
+}
+
+else if(step==4){
+
+main.innerHTML=`
+
+<div class="sub fade">
+Kuch din baad ek din aayega  
+
+jo duniya se zyada mere liye special hoga  
+
+kyunki us din  
+
+meri favourite person ka birthday hoga ❤️  
+
+Aur us din  
+main aapko officially wish karunga  
+sabse pyare tareeke se 💫
+</div>
+
+<button class="btn" onclick="nextStep()">Final Message ✨</button>
+
+`;
+
+}
+
+else if(step==5){
+
+main.innerHTML=`
+
+<div class="big fade">
+Happy birthday in advance my honey pie 😊😘🫂❤️
+</div>
+
+<div class="sub fade">
+Aur us din  
+main aapko officially wish karunga  
+
+Happy Birthday My Princess 👑  
+
+Aap meri life ki sabse cute  
+sabse special  
+aur sabse beautiful memory ho ❤️
+</div>
+
+<button class="btn" onclick="window.location.href='r1.html'">
+Go To Photo Section My Cutie Pie 📸
+</button>
+
+`;
+
+}
+
+}
+
+function startCountdown(){
+
+let birthday=new Date("March 13, 2026 00:00:00").getTime();
+
+let x=setInterval(function(){
+
+let now=new Date().getTime();
+let distance=birthday-now;
+
+let days=Math.floor(distance/(1000*60*60*24));
+let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+let minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+let seconds=Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("countdown").innerHTML =
+days+"d "+hours+"h "+minutes+"m "+seconds+"s";
+
+if(distance<0){
+clearInterval(x);
+document.getElementById("countdown").innerHTML="It's Her Birthday 🎉";
+}
+
+},1000);
+
+}
+
+</script>
+
+</body>
+</html>
