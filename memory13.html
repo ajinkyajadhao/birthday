@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory 13 😜</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+background:linear-gradient(135deg,#ff9a9e,#fbc2eb,#a18cd1,#fad0c4);
+background-size:400% 400%;
+animation:bgmove 10s infinite alternate;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+overflow-x:hidden;
+}
+
+@keyframes bgmove{
+0%{background-position:left;}
+100%{background-position:right;}
+}
+
+.container{
+width:90%;
+max-width:700px;
+color:white;
+}
+
+.big{
+font-size:32px;
+font-weight:bold;
+margin:20px 0;
+}
+
+.sub{
+font-size:18px;
+line-height:1.8;
+margin:20px 0;
+}
+
+.fade{
+animation:fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.btn{
+margin:25px 0;
+padding:12px 30px;
+background:#ff4d6d;
+border:none;
+border-radius:40px;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.1);
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="main" class="container"></div>
+
+<script>
+
+let main=document.getElementById("main");
+let step=0;
+
+main.innerHTML=`
+
+<div class="big fade">things i dont like about my wifey 😒</div>
+
+<div class="sub fade">
+Aaj main batane wala hu  
+
+wo sab cheezein  
+jo mujhe aapke baare mein pasand nahi hai 😏  
+
+Ready ho sunne ke liye?
+</div>
+
+<button class="btn" onclick="nextStep()">jaana h aapko 😒</button>
+
+`;
+
+function nextStep(){
+
+step++;
+
+if(step==1){
+
+main.innerHTML=`
+
+<div class="big fade">Thing I Don't Like #1 😤</div>
+
+<div class="sub fade">
+Mujhe bilkul pasand nahi hai  
+ki aap itni cute kyun ho 😭  
+
+Matlab seriously...  
+
+Itni cuteness allowed nahi honi chahiye  
+warna main bas tumhe hi dekhta rehta hu ❤️
+</div>
+
+<button class="btn" onclick="nextStep()"> or bhi h😅</button>
+
+`;
+
+}
+
+else if(step==2){
+
+main.innerHTML=`
+
+<div class="big fade">Thing I Don't Like #2 😑</div>
+
+<div class="sub fade">
+Mujhe ye bhi pasand nahi hai  
+ki aap jab gussa hoti ho  
+
+tab bhi itni cute lagti ho 😭  
+
+Matlab gussa bhi properly nahi kar paati  
+kyunki main hasne lagta hu 😅
+</div>
+
+<button class="btn" onclick="nextStep()">or sunna h aapko ?😒</button>
+
+`;
+
+}
+
+else if(step==3){
+
+main.innerHTML=`
+
+<div class="big fade">Thing I Don't Like #3 😒</div>
+
+<div class="sub fade">
+Aur ek aur cheez jo mujhe bilkul pasand nahi hai...  
+
+aapki smile ❤️  
+
+Kyuki jab tum smile karti ho  
+toh meri saari tension gayab ho jaati hai  
+aur main bas tumhe hi dekhte rehna chahta hu
+</div>
+
+<button class="btn" onclick="nextStep()">Next 💌</button>
+
+`;
+
+}
+
+else if(step==4){
+
+main.innerHTML=`
+
+<div class="big fade">A Little Shayri For You ✨</div>
+
+<div class="sub fade">
+aapki har ada mujhe pareshan karti hai,  
+aapki har smile mujhe bechain karti hai.  
+
+Sach bolu to mujhe aapki ek bhi cheez pasand nahi...  
+
+Kyuki main tumhe pasand nahi karta,  
+main aapse pyaar karta hu ❤️
+</div>
+
+<button class="btn" onclick="nextStep()">Next 💖</button>
+
+`;
+
+}
+
+else if(step==5){
+
+main.innerHTML=`
+
+<div class="big fade">
+Happy Birthday In Advance  
+My Moonlight 🌙
+</div>
+
+<div class="sub fade">
+Chaand bhi sharma jaye aapki roshni dekh kar,  
+sitare bhi jhuk jaye aapki khushi dekh kar.  
+
+Meri dua hai har din aapka  
+khushiyon se bhara ho ❤️  
+
+Kyuki meri duniya ki sabse khoobsurat roshni  
+aap ho... meri moonlight 🌙
+</div>
+
+<button class="btn" onclick="window.location.href='r1.html'">
+Go To Photo Section My Cutie Pie 📸
+</button>
+
+`;
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
