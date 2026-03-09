@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory 14</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+background:linear-gradient(135deg,#a18cd1,#fbc2eb,#fad0c4);
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+}
+
+.container{
+width:90%;
+max-width:700px;
+}
+
+.big{
+font-size:32px;
+font-weight:bold;
+margin:20px 0;
+}
+
+.sub{
+font-size:18px;
+line-height:1.8;
+margin:20px 0;
+}
+
+.btn{
+margin:25px 0;
+padding:12px 30px;
+background:#ff4d6d;
+border:none;
+border-radius:40px;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="main" class="container"></div>
+
+<script>
+
+let main=document.getElementById("main");
+let step=0;
+
+main.innerHTML=`
+
+<div class="big">Memory 14</div>
+
+<div class="sub">
+Har story ka ek chapter hota hai  
+aur har chapter ki apni memories hoti hain.  
+
+Ye page unhi memories ke liye hai.
+</div>
+
+<button class="btn" onclick="nextStep()">Next</button>
+
+`;
+
+function nextStep(){
+
+step++;
+
+if(step==1){
+
+main.innerHTML=`
+
+<div class="sub">
+Jo bhi time humne saath spend kiya  
+
+wo mere liye hamesha special rahega.  
+
+Kuch moments hote hain  
+jo life me hamesha yaad rehte hain.
+</div>
+
+<button class="btn" onclick="nextStep()">Next</button>
+
+`;
+
+}
+
+else if(step==2){
+
+main.innerHTML=`
+
+<div class="sub">
+Kabhi hasi ke pal the, kabhi baaton ki raat thi,  
+kabhi choti si ladaai, kabhi pyari si baat thi.  
+
+Jo bhi tha, jaise bhi tha,  
+wo meri life ki ek khoobsurat yaad thi.
+</div>
+
+<button class="btn" onclick="nextStep()">Next</button>
+
+`;
+
+}
+
+else if(step==3){
+
+main.innerHTML=`
+
+<div class="big">
+Take Care
+</div>
+
+<div class="sub">
+Main bas ye chahta hu  
+ki tum hamesha khush raho.  
+
+Aur life tumhe  
+bohot saari khushiyan de.
+</div>
+
+<button class="btn" onclick="window.location.href='r1.html'">
+See Photo Memories
+</button>
+
+`;
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
